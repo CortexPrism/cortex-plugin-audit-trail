@@ -80,3 +80,13 @@ deno task validate
 ## License
 
 MIT
+
+## Events
+
+This plugin subscribes to the Cortex event bus for real-time processing:
+
+| Event | Purpose |
+|-------|---------|
+|  | Capture tool execution for audit logs |
+|  | Log session start events |
+|  | Log session termination events |

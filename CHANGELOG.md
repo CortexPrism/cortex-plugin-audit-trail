@@ -1,16 +1,11 @@
-# Changelog
+# Changelog — Audit Trail Exporter
 
-## [Unreleased]
+## [1.0.1] — 2026-06-15
 
-### Added
-- Initial project setup
+### Fixed
+- Added `events` array to manifest: subscribes to `tool:post-execute`, `session:start`, `session:end` for automatic audit log capture via Cortex event bus
 
 ## [1.0.0] — 2026-06-15
 
 ### Added
-- Initial release of cortex-plugin-audit-trail
-- `audit_export` — Export to Splunk, Elastic, Datadog, file, S3 in JSON/CEF/LEEF/CSV
-- `audit_schedule` — Create, list, delete recurring export schedules
-- `audit_redact` — Redact sensitive fields (passwords, tokens, keys) from log data
-- `audit_compliance_format` — Format logs for SOC 2, HIPAA, GDPR, PCI-DSS
-- `audit_stats` — Audit trail statistics by time range
+- Initial plugin scaffold with 5 audit tools supporting Splunk, Elastic, Datadog, S3 exports
