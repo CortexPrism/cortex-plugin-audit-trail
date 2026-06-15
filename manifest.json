@@ -1,0 +1,101 @@
+{
+  "name": "cortex-plugin-audit-trail",
+  "version": "1.0.0",
+  "description": "Export audit logs to SIEM/SOAR (Splunk, Elastic, Datadog) with scheduling and redaction",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-audit-trail",
+  "homepage": "https://github.com/CortexPrism/cortex-plugin-audit-trail",
+  "capabilities": [
+    "tools",
+    "events:listener",
+    "network:fetch"
+  ],
+  "tools": [
+    {
+      "name": "audit_export",
+      "description": "Export audit logs to a destination in the specified format",
+      "params": [
+        { "name": "destination", "type": "string", "description": "Export destination", "required": true, "enum": ["splunk", "elastic", "datadog", "file", "s3"] },
+        { "name": "time_range", "type": "string", "description": "Time range for logs", "required": false, "default": "24h" },
+        { "name": "format", "type": "string", "description": "Export format", "required": false, "default": "json", "enum": ["json", "cef", "leef", "csv"] },
+        { "name": "filter", "type": "string", "description": "JSON query filter for log selection", "required": false }
+      ]
+    },
+    {
+      "name": "audit_schedule",
+      "description": "Schedule recurring audit log exports or manage existing schedules",
+      "params": [
+        { "name": "action", "type": "string", "description": "Schedule action", "required": true, "enum": ["create", "list", "delete"] },
+        { "name": "destination", "type": "string", "description": "Export destination for the schedule", "required": false },
+        { "name": "interval", "type": "string", "description": "Recurring interval", "required": false },
+        { "name": "schedule_id", "type": "string", "description": "Schedule ID for delete action", "required": false }
+      ]
+    },
+    {
+      "name": "audit_redact",
+      "description": "Redact sensitive fields from log data before export",
+      "params": [
+        { "name": "data", "type": "string", "description": "JSON log data to redact", "required": true },
+        { "name": "redaction_rules", "type": "string", "description": "JSON array of field paths to redact", "required": false }
+      ]
+    },
+    {
+      "name": "audit_compliance_format",
+      "description": "Format audit logs to meet compliance framework requirements",
+      "params": [
+        { "name": "data", "type": "string", "description": "JSON log data to format", "required": true },
+        { "name": "framework", "type": "string", "description": "Target compliance framework", "required": true, "enum": ["soc2", "hipaa", "gdpr", "pci_dss"] }
+      ]
+    },
+    {
+      "name": "audit_stats",
+      "description": "Get audit trail statistics for a time range",
+      "params": [
+        { "name": "time_range", "type": "string", "description": "Time range for statistics", "required": false, "default": "30d" }
+      ]
+    }
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "cortex": ">=1.0.0"
+  },
+  "aiDisclosure": {
+    "tools": ["Claude Code (Anthropic)"],
+    "humanReview": true
+  },
+  "ui": {
+    "sections": [
+      {
+        "section": "Export Destinations",
+        "fields": [
+          { "key": "splunkHecUrl", "label": "Splunk HEC URL", "type": "text", "description": "Splunk HTTP Event Collector endpoint" },
+          { "key": "splunkHecToken", "label": "Splunk HEC Token", "type": "secret", "description": "Splunk HEC authentication token" },
+          { "key": "elasticUrl", "label": "Elastic URL", "type": "text", "description": "Elasticsearch cluster URL" },
+          { "key": "elasticApiKey", "label": "Elastic API Key", "type": "secret", "description": "Elasticsearch API key" },
+          { "key": "datadogApiKey", "label": "Datadog API Key", "type": "secret", "description": "Datadog API key for log ingestion" },
+          { "key": "s3Bucket", "label": "S3 Bucket", "type": "text", "description": "AWS S3 bucket name for file exports" }
+        ]
+      },
+      {
+        "section": "General",
+        "fields": [
+          { "key": "defaultFormat", "label": "Default Format", "type": "select", "description": "Default export format", "defaultValue": "json", "options": [
+            { "label": "JSON", "value": "json" },
+            { "label": "CEF", "value": "cef" },
+            { "label": "LEEF", "value": "leef" },
+            { "label": "CSV", "value": "csv" }
+          ]},
+          { "key": "defaultInterval", "label": "Default Interval", "type": "select", "description": "Default scheduling interval", "defaultValue": "daily", "options": [
+            { "label": "Hourly", "value": "hourly" },
+            { "label": "Daily", "value": "daily" },
+            { "label": "Weekly", "value": "weekly" }
+          ]}
+        ]
+      }
+    ]
+  }
+}
