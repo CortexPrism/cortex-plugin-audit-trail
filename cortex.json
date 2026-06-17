@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-audit-trail",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Export audit logs to SIEM/SOAR (Splunk, Elastic, Datadog) with scheduling and redaction",
   "kind": "esm",
   "entryPoint": "mod.ts",
