@@ -28,13 +28,13 @@ export async function onLoad(ctx: PluginContext): Promise<void> {
   datadogApiKey = ddKey || '';
   s3Bucket = s3 || '';
 
-  console.log(
+  ctx.logger.info(
     `[cortex-plugin-audit-trail] Loaded (format: ${defaultFormat}, interval: ${defaultInterval})`,
   );
 }
 
-export async function onUnload(_ctx: PluginContext): Promise<void> {
-  console.log('[cortex-plugin-audit-trail] Unloading...');
+export async function onUnload(ctx: PluginContext): Promise<void> {
+  ctx.logger.info('[cortex-plugin-audit-trail] Unloading...');
 }
 
 const scheduledExports = new Map<

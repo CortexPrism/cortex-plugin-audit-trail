@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-audit-trail",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Export audit logs to SIEM/SOAR (Splunk, Elastic, Datadog) with scheduling and redaction",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -162,7 +162,7 @@
     "humanReview": true
   },
   "ui": {
-    "sections": [
+    "settings": [
       {
         "section": "Export Destinations",
         "fields": [
@@ -212,8 +212,8 @@
             "label": "Default Format",
             "type": "select",
             "description": "Default export format",
-            "defaultValue": "json",
-            "options": [
+            "default": "json",
+            "enum": [
               {
                 "label": "JSON",
                 "value": "json"
@@ -237,8 +237,8 @@
             "label": "Default Interval",
             "type": "select",
             "description": "Default scheduling interval",
-            "defaultValue": "daily",
-            "options": [
+            "default": "daily",
+            "enum": [
               {
                 "label": "Hourly",
                 "value": "hourly"
