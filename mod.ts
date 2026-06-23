@@ -1,5 +1,5 @@
 // deno-lint-ignore-file
-import type { PluginContext, Tool, ToolCallResult, ToolContext } from './types.ts';
+import type { PluginContext, Tool, ToolCallResult } from 'cortex/plugins';
 
 let defaultFormat: string;
 let defaultInterval: string;
@@ -60,7 +60,7 @@ const auditExportTool: Tool = {
     ],
     capabilities: ['network:fetch'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const destination = args.destination as string;
@@ -139,7 +139,7 @@ const auditScheduleTool: Tool = {
     ],
     capabilities: [],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const action = args.action as string;
@@ -250,7 +250,7 @@ const auditRedactTool: Tool = {
     ],
     capabilities: [],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const dataStr = args.data as string;
@@ -391,7 +391,7 @@ const auditComplianceFormatTool: Tool = {
     ],
     capabilities: [],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const dataStr = args.data as string;
@@ -469,7 +469,7 @@ const auditStatsTool: Tool = {
     ],
     capabilities: [],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const timeRange = (args.time_range as string) || '30d';

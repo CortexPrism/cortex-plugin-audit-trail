@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-audit-trail",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Export audit logs to SIEM/SOAR (Splunk, Elastic, Datadog) with scheduling and redaction",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -37,14 +37,14 @@
           "type": "string",
           "description": "Time range for logs",
           "required": false,
-          "default": "24h"
+          "defaultValue": "24h"
         },
         {
           "name": "format",
           "type": "string",
           "description": "Export format",
           "required": false,
-          "default": "json",
+          "defaultValue": "json",
           "enum": [
             "json",
             "cef",
@@ -146,14 +146,14 @@
           "type": "string",
           "description": "Time range for statistics",
           "required": false,
-          "default": "30d"
+          "defaultValue": "30d"
         }
       ]
     }
   ],
   "dependencies": {},
   "peerDependencies": {
-    "cortex": ">=1.0.0"
+    "cortex": ">=0.51.0"
   },
   "aiDisclosure": {
     "tools": [
@@ -212,8 +212,8 @@
             "label": "Default Format",
             "type": "select",
             "description": "Default export format",
-            "default": "json",
-            "enum": [
+            "defaultValue": "json",
+            "options": [
               {
                 "label": "JSON",
                 "value": "json"
@@ -237,8 +237,8 @@
             "label": "Default Interval",
             "type": "select",
             "description": "Default scheduling interval",
-            "default": "daily",
-            "enum": [
+            "defaultValue": "daily",
+            "options": [
               {
                 "label": "Hourly",
                 "value": "hourly"
